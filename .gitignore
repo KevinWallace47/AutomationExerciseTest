@@ -1,0 +1,16 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environment
+venv/
+env/
+ENV/
+
+# Pytest cache
+.pytest_cache/
+
+# Playwright browser binaries / local traces (optional)
+test-results/ 
+playwright-report/

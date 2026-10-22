@@ -1,0 +1,1 @@
+This is a automation testing project for the demonstration website automationexercise.com
