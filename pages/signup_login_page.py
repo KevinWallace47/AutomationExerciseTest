@@ -1,12 +1,15 @@
 from pages.base_page import BasePage
+from playwright.sync_api import Page, expect
 
 class Signup_Login(BasePage):
     def __init__(self, page):
         super().__init__(page)
+        #Signup part of page:
         self.signup_login_link = page.get_by_role("link", name=" Signup / Login")
         self.username_input = page.get_by_role("textbox", name="Name")
         self.email_input = page.locator("form").filter(has_text="Signup").get_by_placeholder("Email Address")
         self.signup_button = page.get_by_role("button", name="Signup")
+        #Signup form fields:
         self.password_input = page.get_by_role("textbox", name="Password *")
         self.mr_radio_button = page.get_by_role("radio", name="Mr.")
         self.mrs_radio_button = page.get_by_role("radio", name="Mrs.")
@@ -27,10 +30,20 @@ class Signup_Login(BasePage):
         self.create_account_button = page.get_by_role("button", name="Create Account")
         self.delete_account_link = page.get_by_role("link", name=" Delete Account")
         self.continue_link = page.get_by_role("link", name="Continue")
+        #Login part of the page:
+        self.login_email_input = page.locator("form").filter(has_text="Login").get_by_placeholder("Email Address")
+        self.login_password_input = page.get_by_role("textbox", name="Password")
+        self.login_button = page.get_by_role("button", name="Login")
+        self.logout_button = page.get_by_role("link", name=" Logout")
+
+
 
     def navigate(self):
         self.page.goto("https://automationexercise.com/")
     
     def delete_account(self, page):
         self.delete_account_link = page.get_by_role("link", name=" Delete Account").click()
-        self.continue_link = page.get_by_role("link", name="Continue")
+        expect(page.get_by_text("Account Deleted!")).to_be_visible()
+        self.continue_link = page.get_by_role("link", name="Continue").click()
+
+
